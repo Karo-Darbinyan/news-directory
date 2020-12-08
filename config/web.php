@@ -9,12 +9,16 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
+            'baseUrl' => '',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'hu4t26qs5baU8br4OpuwyOZvycKQhv6-',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +47,21 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['news', 'heading'],
+//                    'extraPatterns' => [
+//                        'GET heading/index' => 'heading/index'
+//                    ],
+//                    'pluralize' => false
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
